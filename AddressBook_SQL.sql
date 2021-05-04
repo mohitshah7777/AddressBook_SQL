@@ -68,7 +68,6 @@ mysql> DESCRIBE address_book_table;
 
 //UC-3 Insert Values
 
-
 mysql> ALTER TABLE address_book_table
     -> MODIFY COLUMN phoneNumber varchar(12) NOT NULL;
 Query OK, 0 rows affected (0.47 sec)
@@ -133,5 +132,19 @@ mysql> SELECT * FROM address_book_table;
 | Tanay     | Agrawal  | Adarsh Colony | Pune      | Maharashtra    | 411048 | 7878569123  | tanayagrawal@gmail.com |
 +-----------+----------+---------------+-----------+----------------+--------+-------------+------------------------+
 3 rows in set (0.00 sec)
+
+//UC-5 Delete using name
+
+mysql> DELETE FROM address_book_table WHERE firstName = 'Tanay' && lastName = 'Agrawal';
+Query OK, 1 row affected (0.14 sec)
+
+mysql> SELECT * FROM address_book_table;
++-----------+----------+-----------+-----------+----------------+--------+-------------+------------------------+
+| firstName | lastName | address   | city      | state          | zip    | phoneNumber | email                  |
++-----------+----------+-----------+-----------+----------------+--------+-------------+------------------------+
+| Darshan   | Patil    | Hinjewadi | Pune      | Maharashtra    | 411004 | 7512367456  | darshanpatil@gmail.com |
+| Mohit     | Shah     | MB 116    | Burhanpur | Madhya Pradesh | 450445 | 9944556611  | mohitshah@gmail.com    |
++-----------+----------+-----------+-----------+----------------+--------+-------------+------------------------+
+2 rows in set (0.00 sec)
 
 mysql>
