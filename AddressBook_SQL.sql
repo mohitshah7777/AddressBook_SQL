@@ -35,7 +35,7 @@ mysql> SHOW DATABASES;
 +----------------------+
 12 rows in set (0.00 sec)
 
-//UC Create Table
+//UC-2 Create Table
 
 mysql> use address_book_service
 Database changed
@@ -66,7 +66,8 @@ mysql> DESCRIBE address_book_table;
 +-------------+--------------+------+-----+---------+-------+
 8 rows in set (0.00 sec)
 
-//UC3 - Insert Values
+//UC-3 Insert Values
+
 
 mysql> ALTER TABLE address_book_table
     -> MODIFY COLUMN phoneNumber varchar(12) NOT NULL;
@@ -100,6 +101,34 @@ mysql> SELECT * FROM address_book_table;
 | firstName | lastName | address       | city      | state          | zip    | phoneNumber | email                  |
 +-----------+----------+---------------+-----------+----------------+--------+-------------+------------------------+
 | Darshan   | Patil    | Andheri East  | Mumbai    | Maharashtra    | 400047 | 7512367456  | darshanpatil@gmail.com |
+| Mohit     | Shah     | MB 116        | Burhanpur | Madhya Pradesh | 450445 | 9944556611  | mohitshah@gmail.com    |
+| Tanay     | Agrawal  | Adarsh Colony | Pune      | Maharashtra    | 411048 | 7878569123  | tanayagrawal@gmail.com |
++-----------+----------+---------------+-----------+----------------+--------+-------------+------------------------+
+3 rows in set (0.00 sec)
+
+//UC-4 Update/Edit details using name
+
+mysql> SELECT * FROM address_book_table;
++-----------+----------+---------------+-----------+----------------+--------+-------------+------------------------+
+| firstName | lastName | address       | city      | state          | zip    | phoneNumber | email                  |
++-----------+----------+---------------+-----------+----------------+--------+-------------+------------------------+
+| Darshan   | Patil    | Andheri East  | Mumbai    | Maharashtra    | 400047 | 7512367456  | darshanpatil@gmail.com |
+| Mohit     | Shah     | MB 116        | Burhanpur | Madhya Pradesh | 450445 | 9944556611  | mohitshah@gmail.com    |
+| Tanay     | Agrawal  | Adarsh Colony | Pune      | Maharashtra    | 411048 | 7878569123  | tanayagrawal@gmail.com |
++-----------+----------+---------------+-----------+----------------+--------+-------------+------------------------+
+3 rows in set (0.00 sec)
+
+mysql> UPDATE address_book_table
+    -> SET address = 'Hinjewadi', city = 'Pune', zip = 411004
+    -> WHERE firstName = 'Darshan';
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM address_book_table;
++-----------+----------+---------------+-----------+----------------+--------+-------------+------------------------+
+| firstName | lastName | address       | city      | state          | zip    | phoneNumber | email                  |
++-----------+----------+---------------+-----------+----------------+--------+-------------+------------------------+
+| Darshan   | Patil    | Hinjewadi     | Pune      | Maharashtra    | 411004 | 7512367456  | darshanpatil@gmail.com |
 | Mohit     | Shah     | MB 116        | Burhanpur | Madhya Pradesh | 450445 | 9944556611  | mohitshah@gmail.com    |
 | Tanay     | Agrawal  | Adarsh Colony | Pune      | Maharashtra    | 411048 | 7878569123  | tanayagrawal@gmail.com |
 +-----------+----------+---------------+-----------+----------------+--------+-------------+------------------------+
