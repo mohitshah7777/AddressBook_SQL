@@ -208,4 +208,16 @@ mysql> SELECT COUNT(firstName) FROM address_book_table WHERE state = 'Maharashtr
 +------------------+
 1 row in set (0.00 sec)
 
+//UC-8 Ability to retrieve entries sorted alphabetically by Person’s name for a given city
+
+mysql> SELECT * FROM address_book_table WHERE city = 'Burhanpur' ORDER BY firstName ASC;
++-----------+----------+--------------+-----------+----------------+--------+-------------+------------------------+
+| firstName | lastName | address      | city      | state          | zip    | phoneNumber | email                  |
++-----------+----------+--------------+-----------+----------------+--------+-------------+------------------------+
+| Ankit     | Yadav    | Rajpura      | Burhanpur | Madhya Pradesh | 450445 | 9564542151  | ankityadav@gmail.com   |
+| Krishna   | Patel    | Station Road | Burhanpur | Madhya Pradesh | 450445 | 7565452535  | krishnapatel@gmail.com |
+| Mohit     | Shah     | MB 116       | Burhanpur | Madhya Pradesh | 450445 | 9944556611  | mohitshah@gmail.com    |
++-----------+----------+--------------+-----------+----------------+--------+-------------+------------------------+
+3 rows in set (0.05 sec)
+
 mysql>
