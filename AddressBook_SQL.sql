@@ -35,4 +35,35 @@ mysql> SHOW DATABASES;
 +----------------------+
 12 rows in set (0.00 sec)
 
+//UC Create Table
+
+mysql> use address_book_service
+Database changed
+mysql> CREATE TABLE address_book_table (
+    -> firstName varchar(20) NOT NULL,
+    -> lastName varchar(20) NOT NULL,
+    -> address varchar(100) NOT NULL,
+    -> city varchar(20) NOT NULL,
+    -> state varchar(20) NOT NULL,
+    -> zip int NOT NULL,
+    -> phoneNumber int NOT NULL,
+    -> email varchar(50) NOT NULL PRIMARY KEY
+    -> );
+Query OK, 0 rows affected (0.36 sec)
+
+mysql> DESCRIBE address_book_table;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| firstName   | varchar(20)  | NO   |     | NULL    |       |
+| lastName    | varchar(20)  | NO   |     | NULL    |       |
+| address     | varchar(100) | NO   |     | NULL    |       |
+| city        | varchar(20)  | NO   |     | NULL    |       |
+| state       | varchar(20)  | NO   |     | NULL    |       |
+| zip         | int(11)      | NO   |     | NULL    |       |
+| phoneNumber | int(11)      | NO   |     | NULL    |       |
+| email       | varchar(50)  | NO   | PRI | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
 mysql>
