@@ -147,4 +147,22 @@ mysql> SELECT * FROM address_book_table;
 +-----------+----------+-----------+-----------+----------------+--------+-------------+------------------------+
 2 rows in set (0.00 sec)
 
+//UC-6 Ability to Retrieve Person belonging to a City or State from the Address Book
+
+mysql> SELECT * FROM address_book_table WHERE city = 'Burhanpur';
++-----------+----------+---------+-----------+----------------+--------+-------------+---------------------+
+| firstName | lastName | address | city      | state          | zip    | phoneNumber | email               |
++-----------+----------+---------+-----------+----------------+--------+-------------+---------------------+
+| Mohit     | Shah     | MB 116  | Burhanpur | Madhya Pradesh | 450445 | 9944556611  | mohitshah@gmail.com |
++-----------+----------+---------+-----------+----------------+--------+-------------+---------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM address_book_table WHERE state = 'Maharashtra';
++-----------+----------+-----------+------+-------------+--------+-------------+------------------------+
+| firstName | lastName | address   | city | state       | zip    | phoneNumber | email                  |
++-----------+----------+-----------+------+-------------+--------+-------------+------------------------+
+| Darshan   | Patil    | Hinjewadi | Pune | Maharashtra | 411004 | 7512367456  | darshanpatil@gmail.com |
++-----------+----------+-----------+------+-------------+--------+-------------+------------------------+
+1 row in set (0.00 sec)
+
 mysql>
