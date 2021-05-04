@@ -66,4 +66,43 @@ mysql> DESCRIBE address_book_table;
 +-------------+--------------+------+-----+---------+-------+
 8 rows in set (0.00 sec)
 
+//UC3 - Insert Values
+
+mysql> ALTER TABLE address_book_table
+    -> MODIFY COLUMN phoneNumber varchar(12) NOT NULL;
+Query OK, 0 rows affected (0.47 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE address_book_table;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| firstName   | varchar(20)  | NO   |     | NULL    |       |
+| lastName    | varchar(20)  | NO   |     | NULL    |       |
+| address     | varchar(100) | NO   |     | NULL    |       |
+| city        | varchar(20)  | NO   |     | NULL    |       |
+| state       | varchar(20)  | NO   |     | NULL    |       |
+| zip         | int(11)      | NO   |     | NULL    |       |
+| phoneNumber | varchar(12)  | NO   |     | NULL    |       |
+| email       | varchar(50)  | NO   | PRI | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> INSERT INTO address_book_table VALUES
+    -> ('Mohit','Shah','MB 116','Burhanpur','Madhya Pradesh',450445,9944556611,'mohitshah@gmail.com'),
+    -> ('Tanay','Agrawal','Adarsh Colony','Pune','Maharashtra',411048,7878569123,'tanayagrawal@gmail.com'),
+    -> ('Darshan','Patil','Andheri East','Mumbai','Maharashtra',400047,7512367456,'darshanpatil@gmail.com');
+Query OK, 3 rows affected (0.08 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM address_book_table;
++-----------+----------+---------------+-----------+----------------+--------+-------------+------------------------+
+| firstName | lastName | address       | city      | state          | zip    | phoneNumber | email                  |
++-----------+----------+---------------+-----------+----------------+--------+-------------+------------------------+
+| Darshan   | Patil    | Andheri East  | Mumbai    | Maharashtra    | 400047 | 7512367456  | darshanpatil@gmail.com |
+| Mohit     | Shah     | MB 116        | Burhanpur | Madhya Pradesh | 450445 | 9944556611  | mohitshah@gmail.com    |
+| Tanay     | Agrawal  | Adarsh Colony | Pune      | Maharashtra    | 411048 | 7878569123  | tanayagrawal@gmail.com |
++-----------+----------+---------------+-----------+----------------+--------+-------------+------------------------+
+3 rows in set (0.00 sec)
+
 mysql>
