@@ -165,4 +165,47 @@ mysql> SELECT * FROM address_book_table WHERE state = 'Maharashtra';
 +-----------+----------+-----------+------+-------------+--------+-------------+------------------------+
 1 row in set (0.00 sec)
 
+//UC-7 Ability to understand the size of address book by City and State
+
+mysql> SELECT COUNT(firstName) FROM address_book_table WHERE city = 'Burhanpur';
++------------------+
+| COUNT(firstName) |
++------------------+
+|                1 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> INSERT INTO address_book_table VALUES
+    -> ('Ankit','Yadav','Rajpura','Burhanpur','Madhya Pradesh',450445,9564542151,'ankityadav@gmail.com'),
+    -> ('Krishna','Patel','Station Road','Burhanpur','Madhya Pradesh',450445,7565452535,'krishnapatel@gmail.com');
+Query OK, 2 rows affected (0.06 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM address_book_table;
++-----------+----------+--------------+-----------+----------------+--------+-------------+------------------------+
+| firstName | lastName | address      | city      | state          | zip    | phoneNumber | email                  |
++-----------+----------+--------------+-----------+----------------+--------+-------------+------------------------+
+| Ankit     | Yadav    | Rajpura      | Burhanpur | Madhya Pradesh | 450445 | 9564542151  | ankityadav@gmail.com   |
+| Darshan   | Patil    | Hinjewadi    | Pune      | Maharashtra    | 411004 | 7512367456  | darshanpatil@gmail.com |
+| Krishna   | Patel    | Station Road | Burhanpur | Madhya Pradesh | 450445 | 7565452535  | krishnapatel@gmail.com |
+| Mohit     | Shah     | MB 116       | Burhanpur | Madhya Pradesh | 450445 | 9944556611  | mohitshah@gmail.com    |
++-----------+----------+--------------+-----------+----------------+--------+-------------+------------------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT COUNT(firstName) FROM address_book_table WHERE city = 'Burhanpur';
++------------------+
+| COUNT(firstName) |
++------------------+
+|                3 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(firstName) FROM address_book_table WHERE state = 'Maharashtra';
++------------------+
+| COUNT(firstName) |
++------------------+
+|                1 |
++------------------+
+1 row in set (0.00 sec)
+
 mysql>
