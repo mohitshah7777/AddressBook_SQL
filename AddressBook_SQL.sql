@@ -328,4 +328,38 @@ mysql> select * from address_book_table;
 +-----------+----------+--------------+-----------+----------------+--------+-------------+------------------------+-----------+---------------+
 4 rows in set (0.00 sec)
 
+//UC-10 Ability to get number of contact persons i.e. count by type
+
+mysql> SELECT COUNT(type) FROM address_book_table;
++-------------+
+| COUNT(type) |
++-------------+
+|           4 |
++-------------+
+1 row in set (0.10 sec)
+
+mysql> SELECT COUNT(type) FROM address_book_table WHERE type = 'Friend';
++-------------+
+| COUNT(type) |
++-------------+
+|           2 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(type) FROM address_book_table WHERE type = 'Family';
++-------------+
+| COUNT(type) |
++-------------+
+|           1 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(type) FROM address_book_table WHERE type = 'Colleague';
++-------------+
+| COUNT(type) |
++-------------+
+|           1 |
++-------------+
+1 row in set (0.00 sec)
+
 mysql>
