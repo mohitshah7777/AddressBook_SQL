@@ -220,4 +220,112 @@ mysql> SELECT * FROM address_book_table WHERE city = 'Burhanpur' ORDER BY firstN
 +-----------+----------+--------------+-----------+----------------+--------+-------------+------------------------+
 3 rows in set (0.05 sec)
 
+//UC-9  Ability to identify each Address Book with name and Type
+
+mysql> select * from address_book_table;
++-----------+----------+--------------+-----------+----------------+--------+-------------+------------------------+
+| firstName | lastName | address      | city      | state          | zip    | phoneNumber | email                  |
++-----------+----------+--------------+-----------+----------------+--------+-------------+------------------------+
+| Ankit     | Yadav    | Rajpura      | Burhanpur | Madhya Pradesh | 450445 | 9564542151  | ankityadav@gmail.com   |
+| Darshan   | Patil    | Hinjewadi    | Pune      | Maharashtra    | 411004 | 7512367456  | darshanpatil@gmail.com |
+| Krishna   | Patel    | Station Road | Burhanpur | Madhya Pradesh | 450445 | 7565452535  | krishnapatel@gmail.com |
+| Mohit     | Shah     | MB 116       | Burhanpur | Madhya Pradesh | 450445 | 9944556611  | mohitshah@gmail.com    |
++-----------+----------+--------------+-----------+----------------+--------+-------------+------------------------+
+4 rows in set (0.06 sec)
+
+mysql> ALTER TABLE address_book_table
+    -> ADD COLUMN type varchar(20) NOT NULL;
+Query OK, 0 rows affected (1.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE address_book_table
+    -> ADD COLUMN name varchar(20) NOT NULL;
+Query OK, 0 rows affected (1.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE address_book_table;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| firstName   | varchar(20)  | NO   |     | NULL    |       |
+| lastName    | varchar(20)  | NO   |     | NULL    |       |
+| address     | varchar(100) | NO   |     | NULL    |       |
+| city        | varchar(20)  | NO   |     | NULL    |       |
+| state       | varchar(20)  | NO   |     | NULL    |       |
+| zip         | int(11)      | NO   |     | NULL    |       |
+| phoneNumber | varchar(12)  | NO   |     | NULL    |       |
+| email       | varchar(50)  | NO   | PRI | NULL    |       |
+| type        | varchar(20)  | NO   |     | NULL    |       |
+| name        | varchar(20)  | NO   |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+10 rows in set (0.00 sec)
+
+mysql> select * from address_book_table;
++-----------+----------+--------------+-----------+----------------+--------+-------------+------------------------+------+------+
+| firstName | lastName | address      | city      | state          | zip    | phoneNumber | email                  | type | name |
++-----------+----------+--------------+-----------+----------------+--------+-------------+------------------------+------+------+
+| Ankit     | Yadav    | Rajpura      | Burhanpur | Madhya Pradesh | 450445 | 9564542151  | ankityadav@gmail.com   |      |      |
+| Darshan   | Patil    | Hinjewadi    | Pune      | Maharashtra    | 411004 | 7512367456  | darshanpatil@gmail.com |      |      |
+| Krishna   | Patel    | Station Road | Burhanpur | Madhya Pradesh | 450445 | 7565452535  | krishnapatel@gmail.com |      |      |
+| Mohit     | Shah     | MB 116       | Burhanpur | Madhya Pradesh | 450445 | 9944556611  | mohitshah@gmail.com    |      |      |
++-----------+----------+--------------+-----------+----------------+--------+-------------+------------------------+------+------+
+4 rows in set (0.00 sec)
+
+mysql> UPDATE address_book_table
+    -> SET type = 'Friend', name = 'Darshan Patil'
+    -> WHERE firstName = 'Darshan';
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from address_book_table;
++-----------+----------+--------------+-----------+----------------+--------+-------------+------------------------+--------+---------------+
+| firstName | lastName | address      | city      | state          | zip    | phoneNumber | email                  | type   | name          |
++-----------+----------+--------------+-----------+----------------+--------+-------------+------------------------+--------+---------------+
+| Ankit     | Yadav    | Rajpura      | Burhanpur | Madhya Pradesh | 450445 | 9564542151  | ankityadav@gmail.com   |        |               |
+| Darshan   | Patil    | Hinjewadi    | Pune      | Maharashtra    | 411004 | 7512367456  | darshanpatil@gmail.com | Friend | Darshan Patil |
+| Krishna   | Patel    | Station Road | Burhanpur | Madhya Pradesh | 450445 | 7565452535  | krishnapatel@gmail.com |        |               |
+| Mohit     | Shah     | MB 116       | Burhanpur | Madhya Pradesh | 450445 | 9944556611  | mohitshah@gmail.com    |        |               |
++-----------+----------+--------------+-----------+----------------+--------+-------------+------------------------+--------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> UPDATE address_book_table
+    -> SET type = 'Family', name = 'Krishna Patel'
+    -> WHERE firstName = 'Krishna';
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from address_book_table;
++-----------+----------+--------------+-----------+----------------+--------+-------------+------------------------+--------+---------------+
+| firstName | lastName | address      | city      | state          | zip    | phoneNumber | email                  | type   | name          |
++-----------+----------+--------------+-----------+----------------+--------+-------------+------------------------+--------+---------------+
+| Ankit     | Yadav    | Rajpura      | Burhanpur | Madhya Pradesh | 450445 | 9564542151  | ankityadav@gmail.com   |        |               |
+| Darshan   | Patil    | Hinjewadi    | Pune      | Maharashtra    | 411004 | 7512367456  | darshanpatil@gmail.com | Friend | Darshan Patil |
+| Krishna   | Patel    | Station Road | Burhanpur | Madhya Pradesh | 450445 | 7565452535  | krishnapatel@gmail.com | Family | Krishna Patel |
+| Mohit     | Shah     | MB 116       | Burhanpur | Madhya Pradesh | 450445 | 9944556611  | mohitshah@gmail.com    |        |               |
++-----------+----------+--------------+-----------+----------------+--------+-------------+------------------------+--------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> UPDATE address_book_table
+    -> SET type = 'Friend', name = 'Ankit Yadav'
+    -> WHERE firstName = 'Ankit';
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE address_book_table
+    -> SET type = 'Colleague', name = 'Mohit Shah'
+    -> WHERE firstName = 'Mohit';
+Query OK, 1 row affected (0.10 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from address_book_table;
++-----------+----------+--------------+-----------+----------------+--------+-------------+------------------------+-----------+---------------+
+| firstName | lastName | address      | city      | state          | zip    | phoneNumber | email                  | type      | name          |
++-----------+----------+--------------+-----------+----------------+--------+-------------+------------------------+-----------+---------------+
+| Ankit     | Yadav    | Rajpura      | Burhanpur | Madhya Pradesh | 450445 | 9564542151  | ankityadav@gmail.com   | Friend    | Ankit Yadav   |
+| Darshan   | Patil    | Hinjewadi    | Pune      | Maharashtra    | 411004 | 7512367456  | darshanpatil@gmail.com | Friend    | Darshan Patil |
+| Krishna   | Patel    | Station Road | Burhanpur | Madhya Pradesh | 450445 | 7565452535  | krishnapatel@gmail.com | Family    | Krishna Patel |
+| Mohit     | Shah     | MB 116       | Burhanpur | Madhya Pradesh | 450445 | 9944556611  | mohitshah@gmail.com    | Colleague | Mohit Shah    |
++-----------+----------+--------------+-----------+----------------+--------+-------------+------------------------+-----------+---------------+
+4 rows in set (0.00 sec)
+
 mysql>
