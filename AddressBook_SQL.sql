@@ -220,9 +220,8 @@ mysql> SELECT * FROM address_book_table WHERE city = 'Burhanpur' ORDER BY firstN
 +-----------+----------+--------------+-----------+----------------+--------+-------------+------------------------+
 3 rows in set (0.05 sec)
 
-//UC-9  Ability to identify each Address Book with name and Type
 //REFACTORED
-
+//UC-9  Ability to identify each Address Book with name and Type
 
 mysql> CREATE TABLE address_book_data (
     -> id int(10) NOT NULL PRIMARY KEY,
@@ -339,3 +338,72 @@ mysql> select * from address_book_table
 |    3 | Mohit Shah    | Mohit     | Shah     | MB 116       | Burhanpur | Madhya Pradesh | 450445 | 9944556611  | mohitshah@gmail.com    |  3 | Professional |
 +------+---------------+-----------+----------+--------------+-----------+----------------+--------+-------------+------------------------+----+--------------+
 3 rows in set (0.05 sec)
+
+//REFACTORED
+//UC-10 Ability to get number of contact persons i.e. count by type
+
+mysql> ALTER TABLE address_book_data
+    -> CHANGE type type_data varchar(20) NOT NULL;
+Query OK, 0 rows affected (0.14 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from address_book_data;
++----+--------------+
+| id | type_data    |
++----+--------------+
+|  1 | Friend       |
+|  2 | Family       |
+|  3 | Professional |
++----+--------------+
+3 rows in set (0.00 sec)
+
+
+mysql> select type_data, count(type) from address_book_table
+    -> inner join address_book_data
+    -> on address_book_table.type = address_book_data.id
+    -> group by address_book_table.type;
++--------------+-------------+
+| type_data    | count(type) |
++--------------+-------------+
+| Friend       |           1 |
+| Family       |           1 |
+| Professional |           1 |
++--------------+-------------+
+3 rows in set (0.00 sec)
+
+mysql>
+
+//UC-11 Ability to add person to both Friend and Family
+
+mysql> insert into address_book_table values
+    -> (1,'Ramesh Singh','Ramesh','Singh','Dariyaganj','Delhi','Delhi',456789,9944556677,'rameshsingh@gmail.com'),
+    -> (2,'Ishaan Awashthi','Ishaan','Awashthi','Khan Market','Delhi','Delhi',456782,9977554422,'ishaan@gmail.com');
+Query OK, 2 rows affected (0.08 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM address_book_table;
++------+-----------------+-----------+----------+--------------+-----------+----------------+--------+-------------+------------------------+
+| type | name            | firstName | lastName | address      | city      | state          | zip    | phoneNumber | email                  |
++------+-----------------+-----------+----------+--------------+-----------+----------------+--------+-------------+------------------------+
+|    1 | Darshan Patil   | Darshan   | Patil    | Hinjewadi    | Pune      | Maharashtra    | 411004 | 7512367456  | darshanpatil@gmail.com |
+|    2 | Krishna Patel   | Krishna   | Patel    | Station Road | Burhanpur | Madhya Pradesh | 450445 | 7565452535  | krishnapatel@gmail.com |
+|    3 | Mohit Shah      | Mohit     | Shah     | MB 116       | Burhanpur | Madhya Pradesh | 450445 | 9944556611  | mohitshah@gmail.com    |
+|    1 | Ramesh Singh    | Ramesh    | Singh    | Dariyaganj   | Delhi     | Delhi          | 456789 | 9944556677  | rameshsingh@gmail.com  |
+|    2 | Ishaan Awashthi | Ishaan    | Awashthi | Khan Market  | Delhi     | Delhi          | 456782 | 9977554422  | ishaan@gmail.com       |
++------+-----------------+-----------+----------+--------------+-----------+----------------+--------+-------------+------------------------+
+5 rows in set (0.00 sec)
+
+mysql> select type_data, count(type) from address_book_table
+    -> inner join address_book_data
+    -> on address_book_table.type = address_book_data.id
+    -> group by address_book_table.type;
++--------------+-------------+
+| type_data    | count(type) |
++--------------+-------------+
+| Friend       |           2 |
+| Family       |           2 |
+| Professional |           1 |
++--------------+-------------+
+3 rows in set (0.00 sec)
+
+mysql>
